@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+{% load static  %}
+{% block content %}
+
+<div class="order-tracker-wrapper">
+{% if order.is_delivered %}
+{% else %}
+{% endif %}
+    <!-- Header Section -->
+    <div class="tracker-header">
+        <div class="tracker-logo"><img src="{% static 'images/o_logo.png' %}" style="width: 50px; padding: 10px; background-color: white;border-radius: 10px;" alt="Logo" class="logo-image"> </div>
+        <div class="tracker-title  tracking"><span>sipariş takipi</span><span class="material-symbols-outlined">
+            wifi
+            </span></div>
+        <div class="tracker-title"># {{ order.id }}</div>
+        <div class="tracker-title"># {{ order.restaurant.name }}</div>
+    </div>
+    
+    <!-- Main Content Section -->
+    <div class="tracker-content">
+        <div class="tracker-image-container">
+
+        {% if order.is_accepted %}
+        <img src="{% static 'images/' %}{{ order.order_image }}.png" style="width: 200px" alt="{{ order.order_image }}" class="tracker-image">
+        <p class="tracker-sub-message">{{ order.order_stepDes }}</p>
+
+        {% else %}
+        {% if order.is_canceled  %}
+                    <img src="{% static 'images/cancel1.png' %}"style="width: 200px"  alt="{{ order.order_image }}" class="tracker-image">
+                    <p class="tracker-sub-message">{{ order.order_stepDes }}</p>
+
+         {% else %}
+         <img src="{% static 'images/wait_accept.png' %}"style="width: 200px"  alt="{{ order.order_image }}" class="tracker-image">
+        <p class="tracker-sub-message">Biraz bekelyin ..</p>
+
+
+         {% endif %}
+        {% endif %}
+           
+        </div>
+
+        <!-- Steps Section -->
+        <div class="tracker-steps">
+            <!-- Step 1 -->
+            <div class="tracker-step {% if order.is_accepted %}  tracker-step-active  {% endif %} ">
+                <span class="tracker-step-circle">1</span>
+                <span class="tracker-step-label"> kabul edildi </span>
+            </div>
+              
+             <div class="tracker-progress {% if order.is_accepted %} tracker-progress-completed  {% endif %} "></div>
+           
+            <!-- Step 2 -->
+            <div class="tracker-step   {% if order.is_accepted %}  tracker-step-active  {% endif %}">
+                <span class="tracker-step-circle">2</span>
+                <span class="tracker-step-label">hazırlanıyor</span>
+            </div>
+            <div class="tracker-progress  {% if order.is_on_way %}  tracker-progress-completed  {% endif %}"></div>
+
+            <!-- Step 3 -->
+            <div class="tracker-step{% if order.is_on_way %}   tracker-step-active  {% endif %} ">
+                <span class="tracker-step-circle">3</span>
+                <span class="tracker-step-label">yola çıktı</span>
+            </div>
+            <div class="tracker-progress {% if order.is_delivered %}  tracker-progress-completed  {% endif %}"></div>
+
+            <!-- Step 4 -->
+            <div class="tracker-step  {% if order.is_delivered %}  tracker-step-active  {% endif %}"  >
+                <span class="tracker-step-circle">4</span>
+                <span class="tracker-step-label">teslim edildi</span>
+            </div>
+        </div>
+    </div>
+</div>
+     
+{% endblock %}

@@ -1,0 +1,30 @@
+
+{% extends 'main/layout.html' %}
+{% load static  %}
+{% block content %}
+<div class="siparislerim">
+    <div class="food-app-container">
+        <div class="food-app-section-title">Önceki Siparişlerim</div>
+       {% for order in orders %}
+       <div class="food-app-card">
+        <div class="food-app-card-header">
+          <img src="{{ order.restaurant.image.url }}" alt="Product">
+          <div class="food-app-card-info">
+            <p class="food-app-card-title">{{ order.restaurant.name }}</p>
+            <p class="food-app-card-date">{{ order.order_image }}</p>
+          </div>
+          <p class="food-app-card-price">{{order.total_price  }} TL</p>
+        </div>
+        <div class="food-app-card-details">
+         {% for item in order.items.all %}
+         <span> {{ item.quantity }} x {{ item.product.name }}</span>
+         {% endfor %}
+        </div>
+        <div class="food-app-card-repeat-order">
+          <button>Siparişi Tekrarla</button>
+        </div>
+      </div>
+       {% endfor %}      
+      </div>
+</div>
+{% endblock %}

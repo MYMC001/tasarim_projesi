@@ -1,0 +1,55 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="active_ordering">
+
+{% for active in user.delivers.all %}
+
+{% if active.order.is_delivered == False %}
+    
+<div class="driver-card">
+    <div class="card-header">
+      <div class="driver-avatar">
+        <img src="driver-avatar.png" alt="Driver Photo">
+      </div>
+      <div class="driver-info">
+        <h3>{{ active.order.user.username }}</h3>
+        <p>{% if active.order.payment.is_payed %} is_payed {% else %}  didnot  {% endif %}</p>
+      </div>
+    </div>
+    <div class="card-content">
+      <p><strong>Order ID:</strong> #{{ active.order.id }}</p>
+      <p><strong>Pickup Location:</strong> 123 Main Street, Cityville</p>
+      <p><strong>Delivery Location:</strong> 456 Elm Street, Townsville</p>
+      <p><strong>Order Status:</strong> Out for Delivery</p>
+    </div>
+    <div class="order-items" id="orderItems" style="display: none;">
+      <ul>
+        {% for item in active.order.items.all %}
+        <li> {{ item.quantity }} x {{ item.product.name }}</li>
+        {% endfor %}
+
+        <li  style="color: red;">price : {{ active.order.total_price }} TL</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <button class="action-btn" id="viewDetailsBtn">View Details</button>
+
+      <form action="{%  url 'd_order_delivred' %}"  method="post">
+
+        {% csrf_token %}
+
+        <input type="hidden"  name="order_id"  value="{{ active.order.id }}">
+        <button class="action-btn complete">Mark as Complete</button>
+
+      </form>
+    </div>
+  </div>
+
+  {% endif %}
+{% endfor %}
+</div>
+
+
+{% endblock %}

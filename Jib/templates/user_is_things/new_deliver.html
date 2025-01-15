@@ -1,0 +1,29 @@
+
+{% extends 'user_is_things/deliver.html' %}
+
+{% block cotent %}
+
+
+  <div class="main">
+    <div class="container">
+      <div class="delivery-card">
+        <div class="card-header">
+          <div>
+            <span>Delivery</span> | <span>Exclusive</span>
+          </div>
+          <div class="close-button" onclick="closeCard()">✖</div>
+        </div>
+        <div class="card-body">
+          <div class="price">$2 <span>Includes expected tip</span></div>
+          <div class="time-distance">9 min (0.4 mi) total</div>
+          <div class="location-info">
+            <strong>Qdoba Mexican Eats (3100 S Grand Blvd, Ste F)</strong><br>
+            S Grand Blvd, St Louis
+          </div>
+        </div>
+        <button class="accept-button" onclick="acceptOrder()">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

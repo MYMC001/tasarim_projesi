@@ -1,0 +1,245 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+
+<div class="make">
+    <div class="res">
+        <!-- Restaurant Details -->
+        <div class="restaurant-container">
+            <div class="restaurant-header">
+                <img src="{{ restaurant.image.url }}" alt="Restaurant Logo" class="restaurant-logo">
+                <div class="restaurant-info">
+                    <h1 class="restaurant-name">{{ restaurant.name }}</h1>   <button class="ulas" style="width: 200px;" >
+                        {% if user.restaurant %}
+
+                         {% else %}
+
+                         <a href="{%   url 'user_message'   restaurant.id %}"><span class="material-symbols-outlined"></span>Bize ulaşabilirsin
+
+
+                        {% endif %}
+                        </a>  </button>
+                    <p class="restaurant-type">{{ restaurant.discription }} - Restoran Teslimatlı</p>
+                    <div class="delivery-info">
+                        <span class="delivery-status">Süper Restoran</span>
+                        <span class="free-delivery">
+                            {% if not  restaurant.is_free %}
+                            <span >Teslimat Ücretsiz</span>
+                            {%  else  %}
+           
+                            <span >Teslimat  Ücretli</span>
+                           {% endif %}
+                        </span>
+                        <span class="min-order">Min. sepet tutarı {{ restaurant.minimum     }} TL</span>
+                        <span class="rating">4.2/5 (80000+)</span>
+                    </div>
+                </div>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                   {% if message.tags == 'error' %}
+                   <div class="alert alert-danger" role="alert">
+                     {{ message }} <a href="#" class="alert-link">Read the roles</a>
+                  </div>
+                   {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <!-- Product Form (Initially hidden) -->
+            <div id="product-form" style="display: none; margin-top: 20px;">
+                <h2>Yeni Ürün Ekle</h2>
+                <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                    <div>
+                        <input type="text" id="name" placeholder="Ürün Adı" name="name" required>
+                    </div>
+                    <div>
+                        <input type="number" id="price" placeholder="Fiyat" name="price" required>
+                    </div>
+                    <div>
+                        <textarea id="description" name="discription" required placeholder="Açıklama"></textarea>
+                    </div>
+                    <div>
+                        <textarea id="type" name="type" required placeholder="tip"></textarea>
+                    </div>
+                    <div>
+                        <input type="file" id="image" name="image"  required>
+                        <!-- <button type="button" class="camera" id="uploadButton">
+                            <span class="material-symbols-outlined">photo_camera</span> Upload Image
+                        </button>                 -->
+                    </div>
+                    <button type="submit">Ürün Ekle</button>
+                </form>
+            </div>
+            
+           
+
+            <div class="menu-items">
+                <div class="menu-filter">
+                    <div class="menu-search">   
+                        <input type="text" placeholder="Ara" >
+                        <span class="material-symbols-outlined">
+                        search
+                        </span>     
+                    </div>
+                    <div class="menu-categories">
+                        <!-- <span class="category-item">Popüler (6)</span>
+                        <span class="category-item">Coca-Cola Fırsat Menüleri (1)</span>
+                        <span class="category-item">Menüler (2)</span>
+                        <span class="category-item">Tavuk Dönerler (7)</span>
+                        <span class="category-item">İçecekler (8)</span>
+                        <span class="category-item">Poşet (1)</span> -->
+                    </div>
+                </div>
+
+                <div class="menu-grid">
+                    {% for product in restaurant.product.all %}
+                    <div class="menu-item">
+
+                        <!-- Product Menu -->
+
+                        <div class="menu-card">
+                            <div class="menu-info">
+                              <h2 class="menu-title">{{ product.name }}</h2>
+                              <div class="price-info">
+                                <span class="discount-price">{{ product.price }} TL</span>
+                                <span class="original-price">110 TL</span>
+                              </div>
+                              <p class="menu-description">{{ product.discription }}</p>
+                            </div>
+                            <div class="menu-image">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="menu-item-image">
+                            </div>
+                            
+                          </div>
+                            <div class="process">
+                                 {% if user.restaurant %}
+                                
+                                  
+                                  <div class="process-item">
+                                    
+                                        <button class="delete">
+                                               <a href="{% url 'delete_product' product.id %}"><span class="material-symbols-outlined">
+                                                delete
+                                                </span></a>
+                                        </button>
+                                    </form>
+                                    
+                                  </div>
+                                  <div class="process-item">
+                                    <button   class="update">
+                                        <a href="{% url 'update_product' product.id %}"><span class="material-symbols-outlined">
+                                            sync_alt
+                                            </span></a>
+                                    </button>
+                                  </div>
+
+                                 {% else %}
+                                 <div class="process-item">
+                                    <form action="{% url 'add_item_toOrder' %}"   method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ restaurant.id }}"  name="restaurant_id">
+                                        <input type="hidden" value="{{ product.id }}" name="product_id">
+                                        <button class="add-to-cart" ><span class="material-symbols-outlined">
+                                            add
+                                            </span></button>
+                                    </form>
+                                 </div>
+                                 {% endif %}
+                            
+                            </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if user.restaurant %}
+    {% comment 'This restaurant owner' %} {% endcomment %}
+ {% else%}
+ <div class="cart-container">
+    <div class="delivery-options">
+        <button class="active-option">Restoran <span>(15 – 30 dk.)</span></button>
+    </div>
+
+    <div class="cart-items">
+        <h3>Ürünleriniz</h3>
+        {% if order %}
+          {% if order.is_confirmed == False %}
+          {% for item in order.items.all %}
+          <div class="cart-item">
+
+            <img src="{{  item.product.image.url }}" style="height: 40px;"  alt="{{ item.product.name }}">
+            <div class="item-info">
+                <p>{{ item.product.name }}</p>
+                <p>{{ item.product.price }} TL</p>
+            </div>
+            <div class="item-quantity">
+                {% if item.quantity > 1 %}
+                  <button><a href="{% url 'descrement_item' item.id %}"><span class="material-symbols-outlined">
+                    remove
+                    </span></a></button>
+                    {% else %}
+                    <button class="delete-item"><a href="{% url  'deleteAll_items' item.id %}"><span class="material-symbols-outlined">
+                        delete
+                        </span></a></button>
+                {% endif %}
+                <span>{{ item.quantity }}</span>
+                <button><a href="{% url 'increment_item' item.id %}"><span class="material-symbols-outlined">
+                    add
+                    </span></a></button>
+                   {% if item.quantity > 1 %}
+                    <button class="delete-item"><a href="{% url  'deleteAll_items' item.id %}"><span class="material-symbols-outlined">
+                    delete
+                    </span></a></button>
+                   {% endif %}
+            </div>
+           
+          </div>
+          {% endfor %}
+          {% endif %}
+        {%  endif%}
+         
+    </div>
+    <div class="suggestions">
+        <p>Sepetine bunları da ekleyebilirsin!</p>
+        <span>Diğer kullanıcıların birlikte aldıkları ürünlere göre</span>
+        <div class="scroll-arrow">→</div>
+    </div>
+
+  {% if restaurant.minimum > order.total_price %}
+        <div class="alert alert-warning" role="alert">
+
+            Sipariş için {{ left }} TL'lik ürün daha ekle
+        </div>
+{% endif %}
+<div class="alert " role="alert">
+
+</div>
+
+    <div class="checkout-info">
+        <div class="total">
+            <p>Toplam (ücretler)</p>
+            <p><strong>{{ order.total_price }} TL</strong></p>
+        </div>
+     </div>   
+
+    {% if order.id and order.total_price >= restaurant.minimum %}
+     <button class="checkout-button">
+        <a href="{% url 'order_confirm' order.id %}">Sepeti Onayla</a>
+      </button>
+    {% else %}
+    <button class="checkout-button"   style="background-color: rgb(81, 78, 78);" disabled>
+        <a href="#"  >Onayla</a>
+      </button>
+    {% endif %}
+  
+    </div>
+ {% endif %}
+ 
+</div>
+
+{% endblock %}

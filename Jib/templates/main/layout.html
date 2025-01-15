@@ -1,0 +1,14 @@
+
+{% load static %}
+{% include 'common/head.html' %}
+{% include "common/header.html" %}
+{% block content %} 
+
+{% comment %} The Content Will be Here {% endcomment %}
+{% endblock content%}
+
+{% if user.restaurant %}
+ {% comment 'avoid the footer' %}  {% endcomment  %}
+{% else %}
+   {% include 'common/footer.html' %}
+{% endif %}

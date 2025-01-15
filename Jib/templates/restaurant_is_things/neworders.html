@@ -1,0 +1,101 @@
+{% extends 'main/layout.html' %}
+
+
+{% block content %}
+
+           
+            <div class="the-orders">
+                {% if status %}
+
+                <div class="alert alert-secondary alerting" role="alert"  style="display: flex;">
+                   <span>   Aktif sipariş bulunmamaktadır</span><span class="material-symbols-outlined" >
+                     warning
+                     </span>
+                </div>
+               
+        
+                 {% endif %}
+
+                {% for order in orders %}
+                {% if order.is_canceled == False %}
+
+                <div class="order-summary">
+                   <div class="order-header">Sipariş #{{ order.id }}</div>
+           
+                   <div class="order-items">
+                       {% for item in order.items.all  %}
+                       <div class="order-item">
+                           <span>{{ item.quantity }} × {{ item.product.name }}</span>
+                           <span>{{ item.total_price }}.00 TL</span>
+                       </div>
+
+                       {% endfor  %}
+           
+                       <div class="order-item">
+                           <span>Ara toplam</span>
+                           <span>{{ order.total_price }}.00 TL</span>
+                       </div>
+           
+                       <div class="order-item">
+                           <span>Standart Teslimat</span>
+                           <span>{{ order.restaurant.teslimat_ucreti }} TL</span>
+                       </div>
+           
+                     
+           
+                       <div class="order-item">
+                           <span>İndirim</span>
+                           <span style="color: #ff4d4f;">0.00 TL</span>
+                       </div>
+                   </div>
+                   <div class="total">
+                    {% if messages %}
+                       {% for message in messages %}
+                           
+                       <div class="alert alert-danger">
+                        <strong>{{ message }}</strong> 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                       {% endfor %}
+
+                    {% endif %}
+                   </div>
+                   <div class="total">
+                       <span>Toplam </span>
+                       <span> {{ order.total_price }}TL</span>
+                   </div>
+           
+                   <div class="actions">
+                       <div class="action-button cancel"><span class="material-symbols-outlined">
+                           close
+                           </span><a href="{% url 'canceled' order.id %}">İptal</a>
+                       </div>
+                      {% if  not order.is_accepted %}
+                      <div class="action-button accept"><span class="material-symbols-outlined">
+                       arrow_split
+                       </span><a href="{% url 'Order_tooked' order.id %}">Kabul</a>
+                    </div>
+                      {% endif %}
+                      {% if not order.is_on_way  %}
+                      <div class="action-button dispatched"><span class="material-symbols-outlined">
+                       arrow_forward
+                       </span><a href="{% url 'forout' order.id %}">yolaçıktı</a>
+                     </div>
+
+                      {% endif %}
+                       
+                   </div>
+                </div>
+
+
+               {% endif %}
+
+               {% endfor %}
+
+             
+            </div>
+     
+{% endblock %}

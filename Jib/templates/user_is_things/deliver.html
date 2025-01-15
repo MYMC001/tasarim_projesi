@@ -1,0 +1,153 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="main-container">
+
+  <div class="page-container">
+    <div class="sidebar-container">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+              <div  class=" d_guy_statu ">
+                <form action="{% url 'deliveier_status' %}"  method="post">
+                  {% csrf_token %}
+
+                  <input type="hidden" value="{{ user.username  }}"  name="user_id">
+                  <button  class="{% if user.is_active_f_order == False %} desactive   {% else %} active {% endif %}"  >
+                    {% if user.is_active_f_order == False  %} active {%  else  %} desactive  {% endif %}
+              </button>
+                </form>
+            </div>
+
+            </div>
+            <ul class="sidebar-links">
+                <li><a href="{% url 'active_order' %}" class="sidebar-link">Active order<span class="material-symbols-outlined">
+                  notifications
+                  </span><p style="color: red;">{{ user.deliver_num }}</p></a></li>
+                <li><a href="#" class="sidebar-link">Delivred
+                  <span class="material-symbols-outlined">
+                    check_circle
+                    </span>
+                </a></li>
+               
+
+            </ul>
+        </div>
+    </div>
+
+   
+</div>
+
+
+  {% if  user.is_active_f_order  %}
+
+
+  <div class="delivery-container">
+    {% for order in orders %}
+      {% if  order.is_accepted_fd == False and order.is_accepted == True %}
+        <div class="delivery-card" style="display: none;">
+          <div class="delivery-card__header">
+            <div>
+              <span>Delivery</span> | <span>Exclusive  {{ order.id }}</span>
+              
+            </div>
+            <div class="delivery-card__timer" id="timer">30s</div> 
+            <div class="delivery-card__close-button" onclick="closeCard()">✖</div>
+          </div>
+          <div class="delivery-card__body">
+            {% if messages %} 
+
+                {% for message in messages %}
+                <br> <span  style="color: red;">{{message}}</span>
+                 {% endfor %}
+              {% endif  %}
+            <div class="delivery-card__price">
+              {{ order.tip_value }} TL <span class="delivery-card__price-note">Tip</span>
+            </div>
+            <div class="delivery-card__price">
+              {{ order.restaurant.teslimat_ucreti }} TL<span class="delivery-card__price-note">Includes  tip</span>
+            </div>
+
+            <div class="delivery-card__location-info">
+              <strong>{{ order.restaurant.adress }}</strong><br>
+                 {{  order.restaurant.name  }}
+            </div>
+          </div>
+          <form action="{% url 'take_order' %}" method="post">
+ 
+           {% csrf_token %}
+           <input type="hidden" name="order_id" value="{{ order.id }}">
+           <input type="hidden" name="user_id" value="{{ user.id }}">
+           <button class="delivery-card__accept-button" onclick="acceptOrder()">Accept</button>
+ 
+          </form>
+        </div>
+
+
+        {% else %}
+
+      {% endif %}
+ 
+    {% endfor %}
+   </div>
+
+  {% else %}
+  <div class="alert alert-warning itactive" role="alert" style="display: flex; align-items: center;">
+    <span class="material-symbols-outlined" style="margin-right: 8px;">
+      warning
+    </span>
+    Activate your status to see the new orders. 
+  </div>
+  
+  {% endif %}
+
+  <div class="wallet-container">
+    <h2 class="wallet-container__header">Driver Wallet</h2>
+
+    {% if user.wallet %}
+<!-- Balance -->
+<div class="wallet-container__balance">{{ user.wallet.value }}.00  TL</div> <!-- Wallet Balance -->
+
+<!-- Completed Orders Section -->
+<button class="wallet-container__view-button" onclick="toggleOrders()">View Completed Orders</button>
+
+<!-- Order Section (Initially Hidden) -->
+<div id="wallet-order-section" class="wallet-container__order-section" style="display:  block;">
+  <h3 class="wallet-container__order-header">Completed Orders</h3>
+  <ul class="wallet-container__order-list">
+     {% for delivred in user.delivers.all %}
+              {% if  delivred.order.is_delivered   %}
+              <li class="wallet-container__order-item">
+                <span>{{delivred.order.delivred_date}}</span>
+                <span>{{delivred.order.restaurant.name}}</span>
+                <span>{{ delivred.order.Toplam  }} TL </span>
+              </li>
+
+              {% endif %}
+     {% endfor %}
+  
+  </ul>
+</div>
+
+</div>
+
+
+    {% else %}
+
+
+<div  class=" d_guy_statu ">
+             
+
+                  <button  class="  active "  >
+                  <a href="{% url 'active_wallet' %}">  active wallet</a>
+                </button>
+ </div>
+
+    {% endif %}
+
+  <div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,199 @@
+.index-container {
+    margin: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ensures 4 items per row */
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    transition: transform 0.2s;
+}
+
+.card{
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.card-content p {
+    color: #666;
+    margin: 8px 0 0;
+    font-size: 14px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f8f8f8;
+}
+
+.card-footer .price {
+    font-weight: bold;
+    color: #FF9800;
+}
+
+.card-footer .time {
+    font-size: 12px;
+    color: #888;
+}
+
+.highlight-badge {
+    position: absolute;
+    background: #FF9800;
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    top: 10px;
+    right: 10px;
+}
+.card-content a {
+       text-decoration: none;
+       color: rgb(40, 38, 38);
+}
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.favorite-icon span{
+    margin-left: 10px;
+}
+.favorite-icon button{
+    background: none;
+    border: none;
+}
+
+.recommend {
+    display: flex;
+    justify-content: space-between;
+}
+.start {
+    display: flex;
+    justify-content: space-around;
+}
+
+.panda{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+
+}
+
+
+  
+  .filter-menu {
+    width: 280px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    height: 600px;
+  }
+  .filter-menu .submit{
+
+    width: 200px;
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    border-color: white;
+    border-radius: 10px;
+  }
+
+  .filter-menu span.material-symbols-outlined{
+    color: #FF9800;
+  }
+  .filter-menu input {
+    accent-color: #FF9800; /* For modern browsers */
+  }
+  .filter-menu h3 {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+  }
+  
+  .filter-section h4 {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .filter-section label {
+    display: flex;
+    align-items: center;
+    font-size: 0.95em;
+    color: #333;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .filter-section label input[type="radio"],
+  .filter-section label input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color:#FF9800;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .filter-section .filter-tag {
+    background-color: #00b4d8;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin: 5px 5px 10px 0;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .filter-section .filter-tag:hover {
+    background-color: #0077a8;
+  }
+  
+  .filter-section .cuisine-search input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .filter-section .cuisine-search input:focus {
+    outline: none;
+    border-color: #00b4d8;
+    box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
+  }
+  

@@ -1,0 +1,83 @@
+
+{% extends 'main/layout.html'  %}
+{% load static %}
+{%  block content   %}
+
+
+<div class="auth-container">
+    <!-- Tabs for Login and Sign-up -->
+        {% if messages %}
+                {% for message in messages %}
+                       {% if message.level %}
+                       {% else %}
+                       {% endif %}
+                {% endfor %}
+        {% endif %}
+    <div class="tab-buttons">
+        <button class="tab-button active" id="login-tab">Giriş Yap</button>
+        <button class="tab-button" id="signup-tab">Üye Ol</button>
+    </div>
+
+    <form id="login-form" class="auth-form" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="login-email"> Username</label>
+            <input type="text" id="login-email" name="username" placeholder="username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Şifre</label>
+            <input type="password" id="login-password" name="password" placeholder="Şifre" required>
+            <a href="#" class="forgot-password">Şifremi Unuttum</a>
+        </div>
+        <button type="submit" class="btn">GİRİŞ YAP</button>
+    </form>
+
+    <!-- Sign-up Form -->
+    <form id="signup-form" class="auth-form"  action="{% url 'create_account' %}" method="POST" style="display: none;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="signup-email">E-Posta</label>
+            <input type="email" id="signup-email" name="email" placeholder="E-Posta" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-username">Kullanıcı Adı</label>
+            <input type="text" id="signup-username" name="username" placeholder="Kullanıcı Adı" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Şifre</label>
+            <input type="password" id="signup-password" name="password" placeholder="Şifre" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Şifre tekrar</label>
+            <input type="password" id="signup-password" name="confirm_password" placeholder="Şifre tekrar" required>
+        </div>
+        <button type="submit" class="btn">ÜYE OL</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const loginTab = document.getElementById('login-tab');
+    const signupTab = document.getElementById('signup-tab');
+
+    // Event listeners for switching tabs
+    loginTab.addEventListener('click', function() {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+    });
+
+    signupTab.addEventListener('click', function() {
+        signupForm.style.display = 'block';
+        loginForm.style.display = 'none';
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+    });
+});
+
+</script>
+
+{% endblock %}

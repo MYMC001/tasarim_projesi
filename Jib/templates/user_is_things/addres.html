@@ -1,0 +1,77 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="magin">
+    <div class="checkout-container"  style="display: block;">
+        <h2   style="color: ff9800; display: flex; justify-content: start;"><span  style="margin-top: 10px;">Teslimat adresi </span> <span class="material-symbols-outlined"  style="font-size: 40px;"> pin_drop
+
+        <div class="checkout-main",  style="display: flex; justify-content: center;">
+            </span></h2>
+
+            <div class="section" style="border: none;">
+                   
+                <form  method="post" action="{% url 'add_adress' %}">
+
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="hidden"  name="user_id"  value="{{ user.id }}">
+                        </div>
+                       
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label >*İl</label>
+                            <input type="text"  placeholder="İl"   name="il">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">*Mahalle</label>
+                            <input type="text" id="city" placeholder="Mahalle"  name="mahalle">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label >*bina</label>
+                            <input type="text"  placeholder="bina adı"  name="bina">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">*daire</label>
+                            <input type="text"  placeholder="daire numarası"   name="daire">
+                        </div>
+                       
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label >*kat</label>
+                            <input type="number"  placeholder="kat"  name="kat">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">*sokak</label>
+                            <input type="text"  placeholder="sokak"  name="sokak">
+                        </div>
+                        <div class="form-group">
+                            <label >*telefon</label>
+                            <input type="text" placeholder="telefon"  name="telefon">
+                        </div>
+                       
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label >*tam adres</label>
+                            <input type="text" placeholder="tam adres"  name="tamadres">
+                        </div>
+                       
+                    </div>
+                    <div class="form-group">
+                        <input type="submit"   style="background-color: ff9800; color: white    ;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        
+    </div>
+    
+{% endblock %}

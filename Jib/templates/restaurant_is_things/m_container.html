@@ -1,0 +1,73 @@
+{% extends 'main/layout.html' %}
+
+
+{% block content %}
+
+
+    <div class="messenger-main-container">
+        <div class="messenger-user-list">
+            {% for message in messages %}
+    
+                    {% if message.receiver == user  %}
+                    <div class="messenger-user">
+                        <img src="https://via.placeholder.com/40" alt="{{ message.sender.username }}">
+                        <div class="messenger-user-info">
+                            <a href="{% url 'message_container' message.sender.id %}">
+                                <span class="messenger-name">{{ message.sender.username }}</span>
+                                <span class="messenger-last-message">{{ message.text|truncatewords:5 }}</span>
+                            </a>
+                        </div>
+                    </div>  
+                    {% endif %}
+           
+            {% endfor %}
+        
+        
+           </div>
+        
+       
+        <div class="messenger-chat-container">
+            <div class="messenger-messages">
+              {% for message in u_messages %}
+
+              {% if message.receiver == user  and message.sender == sender %}
+
+                <div class="messenger-message received">
+                <div class="messenger-user-icon">A</div>
+                <div class="messenger-message-content">
+                   <p>{{  message.value  }}</p>
+                   <span class="messenger-time">{{ message.date }}</span>
+               </div>
+               </div>
+               {% endif %}
+
+               
+               
+              {% if message.sender == user  and  message.receiver == sender  %}
+              <div class="messenger-message sent">
+                  <div class="messenger-message-content">
+                      <p>{{ message.value  }}</p>
+                      <span class="messenger-time">{{ message.date }} PM</span>
+                  </div>
+                  <div class="messenger-user-icon">B</div>
+              </div>
+               {% endif %}
+
+
+              {% endfor %}
+            </div>
+
+            <div class="messenger-input-container">
+                <form action="{% url 'res_send_message' %}"  method="post"  class="message_form">
+                    {% csrf_token %}
+                <input type="hidden"  value="{{ sender.id }}"  name="user_id">
+                <input type="hidden"  value="{{ user.restaurant.id }}"  name="res_id">
+                <input type="text" placeholder="Type a message..." name="content" class="messenger-message-input">
+                <button class="messenger-send-btn">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

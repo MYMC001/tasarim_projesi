@@ -1,0 +1,790 @@
+
+
+.make {
+    margin-top: 100px;
+    display: flex;
+    margin-bottom: 80px;
+}
+
+
+
+/* Restaurant container */
+.res {
+    flex: 1;
+    width: 200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 1px;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 10px;
+}
+
+.restaurant-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.restaurant-logo {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.restaurant-info {
+    flex: 1;
+}
+
+.restaurant-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.restaurant-type {
+    font-size: 16px;
+    color: #555;
+}
+
+.delivery-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.delivery-status, .free-delivery, .min-order, .rating {
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: rgb(98, 93, 93);
+}
+
+/* Product Form */
+#product-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    width: 600px;
+    border: solid 1px #FF9800;
+}
+
+#product-form h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #FF9800;
+}
+
+#product-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#product-form form div {
+    margin-bottom: 15px;
+}
+
+#product-form input[type="text"],
+#product-form input[type="number"],
+#product-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#product-form input[type="file"] {
+    border: none;
+    font-size: 16px;
+    color: #FF9800;
+}
+
+#product-form button[type="submit"] {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#product-form .camera {
+    background-color: white;
+    outline: none;
+    border: none;
+    width: 560px;
+    text-align: start;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: start;
+    color: rgb(82, 79, 79);
+}
+
+#product-form button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Menu styles */
+.menu-items {
+    margin-top: 30px;
+}
+
+.menu-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 10px; 
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 100%;
+
+}
+
+.menu-item {
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    overflow: hidden; 
+    transition: transform 0.2s; 
+    text-align: center; 
+
+}
+
+.menu-item:hover {
+    transform: scale(1.05); 
+}
+
+.menu-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 500px;
+    height: 100px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    margin: 16px auto;
+  }
+  
+  .menu-info {
+    flex: 1;
+    margin-right: 16px;
+  }
+  
+  .menu-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+  
+  .price-info {
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .discount-price {
+    color: #28a745; 
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 8px;
+    font-size: 14px;
+  }
+  
+  .menu-description {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .menu-image img {
+    margin-top: 10;
+    width: 80px;
+    height: 100px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+  
+
+.process{
+    display: flex;
+    justify-content: end;
+}
+.process .process-item button{
+    border: none;
+    background:none;
+    padding: 10px;
+}
+.process .process-item button  span{
+    font-size: 25px;
+}
+.process .process-item button  span:hover{
+    transition: 1s;
+    font-size: 35px;
+}
+
+.process .process-item .delete a{
+    color: red;
+}
+.process .process-item .update a{
+    color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
+.menu-filter {
+    display: flex;  
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-search {
+   display: flex;
+   justify-content: center;
+   border:1px black solid;
+   border-radius: px;
+   height: 40px;
+}
+.menu-search input{
+    background:none;
+    outline: none;
+    border: none;
+    height: 40px;
+}
+
+.menu-search span{
+    margin-top: 7px;
+}
+
+.menu-categories {
+    display: flex;
+    gap: 15px;
+}
+
+.category-item {
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.category-item:hover {
+    background-color: #ff9800;
+    color: white;
+}
+
+.cart-container {
+    
+    width: 320px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.delivery-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.delivery-options button {
+    flex: 1;
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    background: #f7f7f7;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delivery-options button.active-option {
+    background: #f0f0f0;
+    border-color: #aaa;
+}
+
+.delivery-options span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.cart-items h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.item-info p {
+    margin: 0;
+}
+
+.item-info p:first-child {
+    font-weight: bold;
+}
+
+.item-quantity {
+    margin-left: 14px;
+    width: 130px;
+    display: flex;
+   justify-content: space-around;
+   border: 1px solid black;
+   border-radius: 5px;
+}
+
+
+.item-quantity button {
+    border: none;
+    background: #fff;
+    cursor: pointer;
+}
+
+.item-quantity button:hover{
+    font-size: 200;
+}
+.item-quantity button a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+.suggestions {
+    margin: 20px 0;
+    background: #f7f7f7;
+    border-radius: 5px;
+    top: 0px;
+}
+
+.suggestions p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.suggestions span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.scroll-arrow {
+    text-align: right;
+    font-size: 1.5em;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.checkout-info {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.checkout-info p {
+    margin: 0;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.checkout-info i {
+    margin-right: 5px;
+    color: #ff9500;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.checkout-button {
+    width: 100%;
+        background: #ff9500;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.checkout-button a {
+    color: white;
+}
+
+.checkout-button:hover {
+    background: #ff9500;
+}
+.update-product{
+
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.update-product h2{
+    text-align: center;
+}
+
+
+.notification-badge {
+    background-color: red;
+    color: white;
+    font-size: 0.75em;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+  
+ 
+.the-orders {
+    margin-top: 100px;
+display: grid;
+grid-template-columns: repeat(4, 1fr); 
+gap: 20px; 
+width: 100%;
+justify-items: center; 
+}
+
+.order-summary {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.order-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #333333;
+}
+
+.order-items {
+    margin-bottom: 16px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.order-item span {
+    color: #555555;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 16px;
+    color: #333333;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.action-button {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 5px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+}
+.actions .action-button a{
+    text-decoration: none;
+    color: white;
+}
+
+.cancel {
+    background: #ff4d4f;
+}
+
+.cancel:hover {
+    background: #e43e3f;
+}
+
+.accept {
+    background: #40c463;
+}
+
+.accept:hover {
+    background: #37aa53;
+}
+
+.dispatched {
+    background: #1890ff;
+}
+
+.dispatched:hover {
+    background: #157bd3;
+}
+
+.delivered {
+    background: #722ed1;
+}
+
+.delivered:hover {
+    background: #5a1cb0;
+}
+
+.alerting {
+
+
+    margin-top: 60%;
+    margin-left: 280%;
+    width: 400px;
+}
+
+.messenger-main-container {
+
+
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    width: 800px;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.messenger-user-list {
+    width: 30%;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+.messenger-user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.messenger-user:hover {
+    background-color: #f0f2f5;
+}
+
+.messenger-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.messenger-user-info {
+
+    display: flex;
+    flex-direction: column;
+}
+.message-user-info a{
+    text-decoration: none;
+    color: black;
+}
+.messenger-user-info .messenger-name {
+    font-weight: bold;
+}
+J
+.messenger-user-info .messenger-last-message {
+    font-size: 12px;
+    color: #777;
+}
+
+.messenger-chat-container {
+    border: solid 1px #ff9500;
+
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.messenger-header {
+    background-color: #0084ff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.messenger-messages {
+    padding: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    background-color: #f9f9f9;
+}
+
+.messenger-message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.messenger-message.sent {
+    flex-direction: row-reverse;
+}
+
+.messenger-user-icon {
+    background-color: #e4e6eb;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.messenger-message-content {
+    max-width: 70%;
+    background-color: #e4e6eb;
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.messenger-message.sent .messenger-message-content {
+    background-color: #ff9500;
+    color: white;
+}
+
+.messenger-time {
+    font-size: 10px;
+    color: #777;
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
+}
+
+.messenger-input-container {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.messenger-message-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
+.messenger-send-btn {
+    background-color: #ff9500;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.messenger-send-btn:hover {
+    background-color: #ff9500;
+}
+.message_form{
+    display: flex;
+    width: 600px;
+}
+
+
+.rest {
+    margin-top: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+.rest_center{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+}
+.rest .empty {
+
+    margin-top: 15%;
+    margin-right: 29%;
+}
+
+.rest .empty .alert{
+    display: flex;
+    border: none;
+    background-color: white;
+}
+
+.rest .empty .alert .text{
+
+    margin-top: 3px;
+}
+
+.rest_center .empty {
+
+    margin-top: 140px;
+     
+}
+
+.rest_center .empty .alert{
+    display: flex;
+}
+
+.rest_center .empty .alert .text{
+
+    margin-top: 0px;
+}

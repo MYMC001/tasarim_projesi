@@ -1,0 +1,53 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="prof">
+    <div class="account-container">
+        <div class="account">
+            <div class="account-form-container">
+                <h2 class="account-header">Hesabım <span class="account-info-icon">ℹ️</span></h2>
+    
+                <form action="{% url 'reset_info' %}" method="post" class="account-details-form">
+                    {% csrf_token %}
+                    <label for="username" class="account-label">Adım</label>
+                    <input type="text" id="username" class="account-input" name="username" value="{{ user.username }}" required>
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <button type="submit" class="account-save-button">Kaydet</button>
+                </form>
+    
+                <hr class="account-divider">
+    
+                <h3 class="email-header">E-posta</h3>
+                <div class="email-section">
+                    <input type="email" id="email" class="email-input" name="email" value="{{ user.email }}" disabled>
+                    <button class="email-verify-button">E-posta Adresini Doğrula</button>
+                </div>
+    
+                <hr class="account-divider">
+    
+                <h3 class="password-header">Şifre Değiştir</h3>
+                <div class="password-section">
+                    <form action="{% url 'reset_password' %}" method="post" class="password-change-form">
+                        {% csrf_token %}
+                        <input type="password" id="old_password" class="password-input" name="old_password" placeholder="Eski şifre" required>
+    
+                        <input type="password" id="new_password" class="password-input" name="new_password" placeholder="Yeni şifre" required>
+    
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <button type="submit" class="password-change-button">Şifre Değiştir</button>
+                    </form>
+                </div>
+    
+                {% if messages %}
+                    <div class="message-section">
+                        {% for message in messages %}
+                            <div class="message {{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

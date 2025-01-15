@@ -1,0 +1,77 @@
+{% extends 'main/layout.html' %}
+
+
+{% block content %}
+
+        <div class=" {% if messages %} rest  {% else %} rest_center {% endif %}"  >
+            {% if user.restaurant.r_messages.all %}
+
+            <div class="messenger-user-list">
+                {% for message in messages %}
+        
+                        {% if message.receiver == user  %}
+                        <div class="messenger-user">
+                            <img src="https://via.placeholder.com/40" alt="{{ message.sender.username }}">
+                            <div class="messenger-user-info">
+                                <a href="{% url 'message_container' message.sender.id %}">
+                                    <span class="messenger-name">{{ message.sender.username }}</span>
+                                    <span class="messenger-last-message">{{ message.value }}</span>
+                                </a>
+                            </div>
+                        </div>  
+                        {% endif %}
+               
+                {% endfor %}
+            
+            
+               </div>
+
+
+
+               <div class="empty">
+              
+                
+                  <div class="alert alert-warning" role="alert">
+                    <span  class="text"> Lütfen detayları incelemek için mesajı açın. </span>
+                    <span class="material-symbols-outlined">
+                        lock_open_right
+                        </span>
+
+                  </div>
+                 
+                 
+                      
+                </div>
+
+                {% else %}
+                <div class="empty">
+              
+                
+                    <div class="alert alert-warning" role="alert">
+                      <span  class="text"> Şu anda hiç mesajınız yok. </span>
+                      <span class="material-symbols-outlined">
+                        emoticon
+                        </span>
+  
+                    </div>
+                   
+                   
+                        
+                  </div>
+        
+                {% endif %}
+
+        </div>
+
+
+    
+
+
+
+        
+       
+        
+        
+
+
+{% endblock %}

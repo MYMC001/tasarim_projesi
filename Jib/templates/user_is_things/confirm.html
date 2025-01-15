@@ -1,0 +1,272 @@
+{% extends 'main/layout.html' %}
+
+
+{% block content %}
+
+<div class="magin">
+<div class="checkout-containers">
+    <div class="checkout-main">
+        <p class="store-name">{{ order.restaurant.name }}’s®-{{ user.addresses.city }}
+        </p>
+
+        <div class="section">
+            <form  method="post" action="">
+
+                {% csrf_token %}
+                <div class="form-row">
+                     <h3>Teslimat adresi</h3>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label >*İl</label>
+                        <input type="text"  placeholder="İl" value="{{ user.addresses.city }}"   name="il">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">*Mahalle</label>
+                        <input type="text" id="city" placeholder="Mahalle" value="{{ user.addresses.neighborhood }}"  name="mahalle">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label >*bina</label>
+                        <input type="text"  placeholder="bina adı" value="{{ user.addresses.building_name }}"  name="bina">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">*daire</label>
+                        <input type="text"  placeholder="daire numarası"  value="{{ user.addresses.apartment_n }}"  name="daire">
+                    </div>
+                   
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label >*kat</label>
+                        <input type="number"  placeholder="kat" value="{{ user.addresses.floor_num }}"  name="kat">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">*sokak</label>
+                        <input type="text"  placeholder="sokak"value="{{ user.addresses.street }}"  name="sokak">
+                    </div>
+                    <div class="form-group">
+                        <label >*telefon</label>
+                        <input type="text" placeholder="telefon" value="{{ user.addresses.phone }}" name="telefon">
+                    </div>
+                   
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label >*tam adres</label>
+                        <input type="text" placeholder="tam adres"value="{{ user.addresses.full_adress }}"  name="tamadres">
+                    </div>
+                   
+                </div>
+                <div class="form-group">
+                    <input type="submit"   style="background-color: ff9800; color: white    ;"  value="Değiştir">
+                </div>
+            </form>
+            
+        </div>
+
+       
+
+        <!-- <div class="collapsible-section">
+            <button class="collapsible">
+                <span>⏰ Teslimat süresi</span> Mümkün olan en kısa sürede</button>
+        </div>
+        <div class="collapsible-section">
+            <button class="collapsible">
+                <span>📝 Delivery notes</span> Leave a note for the courier
+            </button>
+        </div> -->
+        <div class="collapsible-section">
+           
+            <div class="tip-options">
+                <form action="{% url 'tip' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{5}}"  name="tip">
+                    <input type="hidden" value="{{ order.id  }}"  name="order_id">
+                    <button class="tip-btn">5.00 TL</button>
+                </form>
+                <form action="{% url 'tip' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ order.id  }}"  name="order_id">
+                    <input type="hidden" value="{{10}}"  name="tip">
+                    <button class="tip-btn">10.00 TL</button>
+                </form>
+                <form action="{% url 'tip' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ order.id  }}"  name="order_id">
+                    <input type="hidden" value="{{20}}"  name="tip">
+                    <button class="tip-btn">20.00 TL</button>
+                </form>
+
+                <form action="{% url 'tip_later' %}" method="post">
+                      {% csrf_token %}
+                     <input type="hidden" name="order_id" value="{{ order.id }}">
+                    <button class="other">sonra</button>
+                </form>
+                <button class="tip">Başka</button>
+                
+
+
+                <form action="{% url 'tip' %}" method="post" class="baska"  style="display: none;" >
+                    {% csrf_token %}
+                    <input type="hidden" name="order_id" value="{{ order.id }}" width="100px">
+                  <input type="number" placeholder="...TL" name="tip">
+                  <button  class="baska_btn">Ekle</button>
+                </form>
+                
+            </div>
+        </div>
+        <div class="collapsible-section">
+            <button class="collapsible   second"  >
+                <span  style="display: flex;"><span class="material-symbols-outlined"  style="color: green;">
+                    payments
+                    </span>
+
+                    {% if order.payment %}
+                    {{ order.payment.payment_type }}
+
+
+                      {% else %}
+                       Ödeme Seç
+                    {% endif  %}
+                   </span> 
+            </button>
+            <div class="payment-options">
+                <form action="{% url 'payment' %}" method="post">
+                    {% csrf_token %}
+                        <div class="option">
+                            <input type="hidden" value="{{ order.id }} " name="order_id">
+                        </div>
+                        <div class="option">
+                            <input type="hidden" name="paymenttype" value="Nakit">
+                        </div>
+                        <button style="display: flex; width: 300px; text-align: start; background-color: ff9800; color: white; border: 1px solid rgb(214, 212, 212);"><span class="material-symbols-outlined">
+                            wallet
+                            </span>Nakit</button>
+                </form>
+
+                <form action="{% url 'payment' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="option">
+                        <input type="hidden" value="{{ order.id }} " name="order_id">
+                    </div>
+                    <div class="option">
+                        <input type="hidden" name="paymenttype" value="Online">
+                    </div>
+                    <button  style="display: flex; width: 300px; text-align: start; background-color: ff9800; color: white; border: 1px solid rgb(214, 212, 212);"><span class="material-symbols-outlined">
+                        credit_card
+                        </span>Online Kredi Kartı/Banka Kartı</button>
+            </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="checkout-basket">
+        <div class="checkoutheader">
+          
+            <div class="im1"><img src="{{ order.restaurant.image.url }}"  width="50px" style="border-radius: 10px;" alt=""></div>
+            <div class="im2"> <p class="store-name">{{ order.restaurant.name }}’s® - {{user.addresses.city }} 
+                {% if not order.restaurant.is_free %}
+                 <span >Teslimat ücreti :Ücretsiz</span>
+                 {%  else  %}
+
+                 <span  >Teslimat ücreti: Ücretli</span>
+                {% endif %}
+            </div>
+               
+        </div>
+        <hr>
+        <div class="checkout-order">
+            <ul  class="order-items">
+                  {% for item in order.items.all %}   
+                  
+                      <li  class="order-item"> </span> <span  class="quantity">{{ item.quantity }} X</span> <span> {{ item.product.name }}</span>   <span>{{ item.total_price }} TL</span></li>
+                  {% endfor %}
+
+            </ul>
+               <hr>
+        </div>
+        <div class="basket-summary">
+            <p>Ara toplam: {{ order.total_price }} TL</p>
+            <p>Tip: {{ order.tip_value }} TL</p>
+              {% if not order.restaurant.is_free %}
+               <p>Teslimat ücreti: 0 TL</p>                
+               {%  else  %}
+               <p>Teslimat ücreti: {{ order.restaurant.teslimat_ucreti }} TL</p>
+                {% endif %}
+            
+            <p>Hizmet ücreti %11 : {{ hizmet_ucreti }} TL</p>
+            <p><strong>Toplam: {{ toplam }}</strong></p>
+            <div class="collapsible-section">
+             {% if order.payment.payment_type == "Nakit" %}
+
+             <button class="order-btn"><a href="{% url 'order_complet'  order.id %}" style="color: white; text-decoration: none;">Sipariş & ödeme ({{ toplam }}TL)</a></button>
+             {% endif %}
+              {% if order.payment.payment_type == "Online" %}
+              <div class="checkout-container">
+                <div id="paypal-button-container"></div>
+             </div>
+
+             {% endif %}
+            </div>
+        </div>
+        
+        <p class="order-note">
+            SİPARİŞ VE ÖDEME'ye tıklayarak alışveriş sepetinizin içeriğini doldurduğunuz bilgileri, <a href="#">gizlilik bildirimimizi</a> ve <a href="#">kullanım şartlarımızı</a> kabul etmiş olursunuz.        </p>
+    </div>
+</div>
+</div>
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{ toplam }}' // Transaction amount
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                window.alert('Payment Complete! Transaction ID: ' + details.id);
+                
+                window.location.href = "{% url 'order_complet'  order.id %}";
+            });
+        }
+    }).render('#paypal-button-container');
+    document.addEventListener('DOMContentLoaded', function () {
+            const collapsibleButtons = document.querySelectorAll('.second');
+
+            collapsibleButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+
+                    if (content.style.display === 'none' || !content.style.display) {
+                        content.style.display = 'flex';
+                       
+                    } else {
+                        content.style.display = 'none';
+                      
+                    }
+                });
+            });
+        });
+
+const tipButton = document.querySelector('.tip');
+const baskaForm = document.querySelector('.baska');
+
+tipButton.addEventListener('click', function() {
+  if (baskaForm.style.display === 'none' || baskaForm.style.display === '') {
+    baskaForm.style.display = 'block'; 
+  } else {
+    baskaForm.style.display = 'none';
+  }
+});
+
+
+</script>
+{% endblock %}

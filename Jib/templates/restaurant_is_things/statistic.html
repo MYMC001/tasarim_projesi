@@ -1,0 +1,109 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .chart-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      margin-top: 100px;
+    }
+
+    .chart {
+      width: 45%;
+      margin-bottom: 20px;
+    }
+
+    .table-container {
+      margin-top: 50px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="chart-container">
+    <div class="chart">
+      <img src="data:image/png;base64,{{ charts.total_revenue }}" alt="Total Revenue Chart" />
+    </div>
+
+    <div class="chart">
+      <img src="data:image/png;base64,{{ charts.total_orders }}" alt="Total Orders Chart" />
+    </div>
+
+    <div class="chart">
+      <img src="data:image/png;base64,{{ charts.confirmed_delivered_orders }}" alt="Confirmed vs Delivered Orders" />
+    </div>
+
+    <div class="chart">
+      <img src="data:image/png;base64,{{ charts.revenue_over_time }}" alt="Revenue Over Time" />
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Restaurant</th>
+          <th>Total Orders</th>
+          <th>Total Revenue</th>
+          <th>Confirmed Orders</th>
+          <th>Delivered Orders</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in restaurant_order_data %}
+        <tr>
+          <td>{{ data.restaurant }}</td>
+          <td>{{ data.total_orders }}</td>
+          <td>${{ data.total_revenue|floatformat:2 }}</td>
+          <td>{{ data.confirmed_orders }}</td>
+          <td>{{ data.delivered_orders }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
+
+
+
+
+{% endblock  %}

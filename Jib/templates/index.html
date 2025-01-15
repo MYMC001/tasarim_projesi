@@ -1,0 +1,127 @@
+{% extends 'main/layout.html' %}
+
+
+
+{% block content %}
+<div class="panda">
+
+    <div class="filter-menu">
+        <h3>Filter</h3>
+        <form action="">
+             
+        <div class="filter-section">
+            <h4>Sort By</h4>
+            <label>
+              <input type="radio" name="sort" checked>
+              <span>Recommended (Default)</span>
+            </label>
+            <label>
+              <input type="radio" name="sort">
+              <span class="material-symbols-outlined">
+                  schedule
+                  </span>
+              <span>Delivery Time</span>
+            </label>
+            <label>
+              <input type="radio" name="sort">
+              <span class="material-symbols-outlined">
+                  distance
+                  </span>
+              <span>Distance</span>
+            </label>
+            <label>
+              <input type="radio" name="sort">
+              <span class="material-symbols-outlined">
+                  star
+                  </span>
+              <span>Restaurant Rating</span>
+            </label>
+          </div>
+        
+          <div class="filter-section">
+            <h4>Cuisine</h4>
+            <div class="cuisine-search">
+              <input type="text" placeholder="Search Cuisine...">
+            </div>
+            <label>
+              <input type="checkbox">
+              <span>Seafood</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Burgers</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Çiğ Köfte</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Ice Cream</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Kebabs</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>World Cuisine</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Home Cooked</span>
+            </label>
+            <label>
+              <input type="checkbox">
+              <span>Breakfast & Pastry</span>
+            </label>
+
+            <input class="submit" type="submit">
+          </div>
+        </form>
+     
+    </div>
+      
+    <div class="index-container">
+        {% for restaurant in restaurants %}
+        <div class="card">
+         <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+         <div class="favorite-icon">
+             <form action="{% url 'Res_favorite' %}" method="post">
+                 {% csrf_token %}
+                 <input type="hidden" value="{{ restaurant.id }}" name="restaurant_id">
+                 <input type="hidden" value="{{ user.id }}" name="user_id">
+                 
+                 {% if user.favorite.all %} 
+     
+                        {% for favorite in user.favorite.all   %}
+                           {% if favorite.restaurant == restaurant %}
+                             <button><span class="material-symbols-outlined" style="color: #FF9800;">favorite</span></button>
+                           {% endif %}
+                        {% endfor  %}
+     
+                  {% else %}
+                  <button><span class="material-symbols-outlined">favorite</span></button>
+                 {% endif %}
+             </form>
+         </div>
+         
+         <span class="highlight-badge">Öne Çıkan</span>
+         <div class="card-content">
+             <h3><a href="{% url 'res_home' restaurant.id %}">{{ restaurant.name }}</a></h3>
+             <p  class="recommend">{{ restaurant.minimum }} TL minimum • {{ restaurant.type }}  <span class="start">
+                 <span class="material-symbols-outlined">
+                     star
+                     </span>
+                     <span>4(+{{ restaurant.likes }})</span>
+             </span></p>  
+         </div>
+        
+     </div>
+        {% endfor %}
+     </div>
+</div>
+
+{% endblock %}
+
+   

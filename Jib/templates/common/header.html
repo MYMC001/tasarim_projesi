@@ -1,0 +1,117 @@
+
+{% load static %}
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                {% if user.is_authenticated  %}
+                 <img src=" {% if user.restaurant %} {{ user.restaurant.image.url }} {% elif user.is_delivier  %} {% static 'images/motor.png'  %}  {% else %} {% static 'images/o_logo.png' %} {% endif %}" alt="Logo" class="logo-image">
+
+                {% else %}
+                <img src="{% static 'images/o_logo.png' %}" alt="Logo" class="logo-image">
+
+                {% endif %}
+            </a>
+        </div>
+        
+        {% if request.path == '/Jib/profile/' or user.restaurant or request.path == '/Jib/addressler/' or request.path == '/Jib/siparislerim/' or request.path == '/Jib/deliver/' or  request.path == '/Jib/active_order/' %}
+        {% else %}
+            <div class="search-bar">
+                <input type="text" placeholder="Aradığınız ürün, kategori veya markayı yazınız" aria-label="Search">
+                <button class="search-button" aria-label="Search">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
+        {% endif %}
+
+        <nav class="user-nav">
+            <ul>
+                {% if request.user.is_authenticated %}
+                   
+                    {% if  user.restaurant %}
+
+                        <li><a href="javascript:void(0);" onclick="toggleForm()">
+                            <span class="material-symbols-outlined">add</span> Ürün Ekle
+                        </a></li>
+                        <li><a href="{% url 'analyze_data' %}"><span class="material-symbols-outlined">monitoring</span> İstatistikler</a></li>
+                        <li class="Notification">
+                            <a href="{% url 'Orders' %}">
+                              <span class="material-symbols-outlined">orders</span>Yeni Siparişler
+                              {% if user.restaurant.new_orders > 0 %}
+                              <span class="notification-badge" id="orderNotificationBadge">{{ user.restaurant.new_orders }}</span>
+                              {% else %}
+                                     {% comment 'No new Orders' %}  {% endcomment %}
+                              {% endif %}
+                            </a>
+                          </li>
+                         <li><a href="{%   url 'messager'  %}"><span class="material-symbols-outlined">chat</span>Mesaj
+                            <span class="notification-badge" id="orderNotificationBadge">1</span>
+                        </a></li>
+                        <li class="dropdown">
+                            <a href="#" class="favorites dropdown-toggle" onclick="toggleDropdown(event)">
+                                <span class="material-symbols-outlined">person</span>
+                                Hesabım
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="{% url 'profile' %}"><span class="material-symbols-outlined">account_circle</span>Profilim</a>
+                                <a href="#"><span class="material-symbols-outlined">settings</span>Ayarlar</a>
+                                <a href="#"><span class="material-symbols-outlined">done_outline</span>Sipariş Geçmişi</a>
+                                <a href="{% url 'log_out' %}" class="login">
+                                    <span class="material-symbols-outlined">logout</span>Çıkış Yap
+                                </a>
+                            </div>
+                        </li>
+                    {% else %}
+                    {% if user.is_delivier  %}
+                  {% else %}
+                  <li>
+                    <a href="{% url 'siparislerim' %}" class="favorites">
+                        <span class="material-symbols-outlined">favorite</span>Favorilerim
+                    </a>
+                </li>
+
+                    {% endif  %}
+                    <li class="dropdown">
+                        <a href="#" class="favorites dropdown-toggle" onclick="toggleDropdown(event)">
+                            <span class="material-symbols-outlined">person</span>
+                            Hesabım
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="{% url 'profile' %}"><span class="material-symbols-outlined">account_circle</span>Profilim</a>
+                            <a href="#"><span class="material-symbols-outlined">settings</span>Ayarlar</a>
+                            <a href="{% url 'siparislerim' %}"><span class="material-symbols-outlined">done_outline</span>Onceki siparislerim</a>
+                            <a href="{% url 'log_out' %}" class="login">
+                                <span class="material-symbols-outlined">logout</span>Çıkış Yap
+                            </a>
+                        </div>
+                    </li>
+                    {% endif %}
+                    
+                 
+                {% else %}
+
+                  
+                    <li>
+                        <a href="{% url 'favorite' %}" class="favorites">
+                            <span class="material-symbols-outlined">favorite</span>Favorilerim
+                        </a>
+                    </li>
+
+                   
+                    <li>
+                        <a href="{% url 'login' %}" class="login">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            <span>Giriş Yap</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AY33uRdzcaFI1muz3iQ7JHsyE4dL0bLQpM74XumJK3eIYaXxwpmVfpDMgxxB4X3dKW_Ktrk7eW6-Oby5&currency=USD"></script>
+    
+{% block content %}    
+
+{% endblock %}
+</body>

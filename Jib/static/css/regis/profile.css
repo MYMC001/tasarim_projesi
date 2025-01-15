@@ -1,0 +1,73 @@
+.prof{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+.account-container {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Maximum width for the form container */
+    padding: 20px; /* Padding for the container */
+}
+
+.account {
+    width: 100%; /* Full width of the account */
+}
+
+/* Add existing styles here for account-form-container and other classes */
+.account-form-container {
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+}
+
+/* Existing styles for headers, labels, inputs, and buttons */
+.account-header, .email-header, .password-header {
+    color: #2E7D32; /* Dark green for headers */
+}
+
+.account-label {
+    display: block; /* Labels on a new line */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold for emphasis */
+}
+
+.account-input, .password-input, .email-input {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between inputs */
+}
+
+.account-save-button, .email-verify-button, .password-change-button {
+    background-color: #FF9800; /* Bright orange */
+    color: #FFFFFF; /* White text */
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.account-save-button:hover, .email-verify-button:hover, .password-change-button:hover {
+    background-color: #e68900; /* Darker orange on hover */
+}
+
+.message-section {
+    margin-top: 20px; /* Space above message section */
+}
+
+.message {
+    padding: 10px; /* Padding for messages */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 10px; /* Space between messages */
+}
+
+.message.success {
+    background-color: #d4edda; /* Green background for success */
+    color: #155724; /* Dark green text */
+}
+
+.message.error {
+    background-color: #f8d7da; /* Red background for errors */
+    color: #721c24; /* Dark red text */
+}

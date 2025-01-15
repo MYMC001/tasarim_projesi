@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+            <!-- Product Form (Initially hidden) -->
+            
+<div  class="update-product">
+
+    <div id="product-form"  >
+        <h2>Ürün Gunceleme</h2>
+        <form action="{% url 'confirm_productUpdate'  %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}" id="">
+            <div>
+                <input type="text" id="name" value="{{ product.name }}" name="name" >
+            </div>
+            <div>
+                <input type="number" id="price" value="{{ product.price }}" name="price" >
+            </div>
+            <div>
+                <textarea id="description" name="discription"    >{{ product.discription }}</textarea>
+            </div>
+            <div>
+                <textarea id="type" name="type"    >{{ product.type }}</textarea>
+            </div>
+           
+                <button type="submit">Ürün Ekle</button>
+            
+        </form>
+    </div>    
+
+</div>
+
+{% endblock %}
